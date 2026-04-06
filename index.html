@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+        }
+        body{
+            background: linear-gradient(to right, rgb(4, 0, 255), rgb(122, 26, 26));
+           font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+        }
+
+        .boxLogin{
+            background-color: whitesmoke;
+            width: 350px;
+            height: 410px;
+            border-radius: 8px;
+            margin: 30px auto; /*desta forma, centraliza a div pai no body*/
+            padding: 25px;
+        }
+
+        h3, p{
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #email, #senha{
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 08px;
+            cursor: pointer;
+        }
+
+        button{
+            width: 100%;
+            padding: 8px;
+            background-color: blue;
+            color: white;
+            margin-top: 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .bi-lock-fill{
+            font-size: 40px;
+            color: rgb(23, 10, 196);
+            display: block;
+            text-align: center;
+            margin-bottom: 20px;
+            }
+    </style>
+
+</head>
+<body>
+
+    <div class="boxLogin">
+        <i class="bi bi-lock-fill"></i>
+        <h3>Login</h3>
+        <p>Sistema de Autenticação</p>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="text" id="email">
+        </div>
+
+        <div>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha">
+        </div>
+
+        <div>
+            <input type="checkbox" id="termoDeUso"> Li e concordo com os termos de uso.
+        </div>
+
+        <div>
+            <button type="button" onclick="logar()">Entrar</button>
+        </div>
+    </div>
+
+    <script>
+
+        let usuarios = 
+        [ // lista de usuarios cadastrados no banco de dados //
+            {nome: "Renato", email: "anchieta.jrap@gmail.com", senha: "123456"},
+            {nome: "jose", email: "jose.@gmail.com", senha: "264695"},
+            {nome: "Fulano", email: "fulano.@gmail.com", senha: "587432"},
+        ]
+        function logar() {
+           let email = document.querySelector('#email').value;
+           let senha = document.querySelector('#senha').value;
+           let termoDeUso = document.querySelector('#termoDeUso').checked;
+
+          if (email == ""){
+            alert("O campo E-mail é obrigatório!");
+            return;
+          }
+          if (senha == ""){
+            alert("Senha inválida!");
+            return;
+          }
+
+          if (termoDeUso == false){
+            alert ("Você é obrigado a aceitar os termos de uso!");
+            return;
+          }
+
+          //iterando com o find() - item representa cada usuário da lista no BD//
+          let usuarioEncontrado = usuarios.find(item => {
+           return item.email === email && item.senha === senha});
+
+          if (usuarioEncontrado){
+            //alert("Usuário logado com sucesso!")//
+            window.location.href = "home.html";
+          }
+          else{
+
+
+
+
+
+
+            alert("E-mail ou senha inválido!")
+          }
+
+        }
+    </script>
+    
+</body>
+</html>
